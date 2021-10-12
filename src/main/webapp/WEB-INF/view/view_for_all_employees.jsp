@@ -1,3 +1,4 @@
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
     <head>
@@ -9,14 +10,18 @@
 
         <br><br>
 
-        <input type="button" value="Salary"
-                onclick="window.location.href = 'hr_info'">
-        Only for HR
+        <security:authorize access="hasRole('HR')">
+            <input type="button" value="Salary"
+                   onclick="window.location.href = 'hr_info'">
+            Only for HR
+        </security:authorize>
 
         <br><br>
 
-        <input type="button" value="Performance"
-               onclick="window.location.href = 'manager_info'">
-        Only for Managers
+        <security:authorize access="hasRole('MANAGER')">
+            <input type="button" value="Performance"
+                   onclick="window.location.href = 'manager_info'">
+            Only for Managers
+        </security:authorize>
     </body>
 </html>
